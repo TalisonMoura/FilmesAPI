@@ -41,19 +41,19 @@ namespace FilmesAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteMovie(int id, [FromBody] DeleteMovieDto movieDto)
+        public IActionResult DeleteMovie(int id)
         {
             var movie = _movieContext.Movies.FirstOrDefault(x => x.Id == id);
             if (movie == null) return NotFound();
-            _mapper.Map(movieDto, movie);
+            _movieContext.Remove(movie);
             _movieContext.SaveChanges();
             return NoContent();
         }
 
         [HttpGet]
-        public IEnumerable<Movie> GetMovies([FromQuery] int skip = 0, [FromQuery] int take = 50)
+        public IEnumerable<ReadMovieDto> GetMovies([FromQuery] int skip = 0, [FromQuery] int take = 50)
         {
-            return _movieContext.Movies.Skip(skip).Take(take);
+            return _mapper.Map<List<ReadMovieDto>>(_movieContext.Movies.Skip(skip).Take(take));
         }
 
         [HttpGet("{id}")]
@@ -61,7 +61,8 @@ namespace FilmesAPI.Controllers
         {
             var movie = _movieContext.Movies.FirstOrDefault(x => x.Id == id);
             if (movie == null) return NotFound();
-            return Ok(movie);
+            var movieDto = _mapper.Map<ReadMovieDto>(movie);
+            return Ok(movieDto);
         }
 
         [HttpPatch("{id}")]
