@@ -13,7 +13,7 @@ namespace FilmesAPI.Controllers
 
         private MovieContext _movieContext;
         private IMapper _mapper;
-                
+
         public MovieController(MovieContext movieContext, IMapper iMapper)
         {
             _movieContext = movieContext;
@@ -27,6 +27,16 @@ namespace FilmesAPI.Controllers
             _movieContext.Movies.Add(movie);
             _movieContext.SaveChanges();
             return CreatedAtAction(nameof(GetMovieById), new { id = movie.Id }, movie);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateMovie(int id, [FromBody] UpdateMovieDto movieDto)
+        {
+            var movie = _movieContext.Movies.FirstOrDefault(x => x.Id == id);
+            if (movie == null) return NotFound();
+            _mapper.Map(movieDto, movie);
+            _movieContext.SaveChanges();
+            return NoContent();
         }
 
         [HttpGet]

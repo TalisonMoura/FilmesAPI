@@ -37,3 +37,5 @@ C:\Users\talis\source\repos\FilmesAPI\FilmesAPI\obj\Debug\net6.0\refint\FilmesAP
 C:\Users\talis\source\repos\FilmesAPI\FilmesAPI\obj\Debug\net6.0\FilmesAPI.pdb
 C:\Users\talis\source\repos\FilmesAPI\FilmesAPI\obj\Debug\net6.0\FilmesAPI.genruntimeconfig.cache
 C:\Users\talis\source\repos\FilmesAPI\FilmesAPI\obj\Debug\net6.0\ref\FilmesAPI.dll
+C:\Users\talis\source\repos\FilmesAPI\FilmesAPI\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\talis\source\repos\FilmesAPI\FilmesAPI\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
