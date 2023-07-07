@@ -13,7 +13,11 @@ namespace FilmesAPI.Controllers
 
         private MovieContext _movieContext;
         private IMapper _mapper;
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> 50c2781fead245e19046805c4ddf050ad65bf46e
         public MovieController(MovieContext movieContext, IMapper iMapper)
         {
             _movieContext = movieContext;
@@ -23,7 +27,11 @@ namespace FilmesAPI.Controllers
         [HttpPost]
         public IActionResult AddMovie([FromBody] CreateMovieDto movieDto)
         {
+<<<<<<< HEAD
             Movie movie = _mapper.Map<Movie>(movieDto);
+=======
+
+>>>>>>> 50c2781fead245e19046805c4ddf050ad65bf46e
             _movieContext.Movies.Add(movie);
             _movieContext.SaveChanges();
             return CreatedAtAction(nameof(GetMovieById), new { id = movie.Id }, movie);
