@@ -22,6 +22,5 @@ namespace FilmesAPI.Models
         public int Duration { get; set; }
 
     }
-
 }
 
