@@ -49,8 +49,8 @@ namespace FilmesAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetCineById(int id)
         {
-            Cinema cinema = _context.Cinemas.FirstOrDefault(x  => x.Id == id);
-            if(cinema != null)
+            Cinema cinema = _context.Cinemas.FirstOrDefault(x => x.Id == id);
+            if (cinema != null)
             {
                 ReadCinemaDto cinemaDto = _mapper.Map<ReadCinemaDto>(cinema);
                 return Ok(cinemaDto);
@@ -74,10 +74,10 @@ namespace FilmesAPI.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteCine(int id) 
+        public IActionResult DeleteCine(int id)
         {
             var cinema = GetCineById(id);
-            if(cinema == null) return NotFound();
+            if (cinema == null) return NotFound();
             _context.Remove(cinema);
             _context.SaveChanges();
             return NoContent();

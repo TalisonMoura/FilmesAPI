@@ -4,6 +4,34 @@
         <name>FilmesAPI</name>
     </assembly>
     <members>
+        <member name="M:FilmesAPI.Controllers.CinemaController.AddCine(FilmesAPI.Data.Dtos.CreateCinemaDto)">
+            <summary>
+            
+            </summary>
+            <param name="cinemaDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FilmesAPI.Controllers.CinemaController.GetAllCines">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FilmesAPI.Controllers.CinemaController.GetCineById(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FilmesAPI.Controllers.CinemaController.UpdateCine(System.Int32,FilmesAPI.Data.Dtos.UpdateCinemaDto)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <param name="cineDto"></param>
+            <returns></returns>
+        </member>
         <member name="M:FilmesAPI.Controllers.MovieController.AddMovie(FilmesAPI.Data.Dtos.CreateMovieDto)">
             <summary>
             Adiciona um filme ao banco de dados
