@@ -63,20 +63,20 @@ namespace FilmesAPI.Controllers
         /// <param name="id"></param>
         /// <param name="cineDto"></param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult UpdateCine(int id, [FromBody] UpdateCinemaDto cineDto)
         {
-            var cinema = GetCineById(id);
+            Cinema cinema = _context.Cinemas.FirstOrDefault(x => x.Id == id);
             if (cinema == null) return NotFound();
             _mapper.Map(cineDto, cinema);
             _context.SaveChanges();
             return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteCine(int id)
         {
-            var cinema = GetCineById(id);
+            Cinema cinema = _context.Cinemas.FirstOrDefault(x => x.Id == id);
             if (cinema == null) return NotFound();
             _context.Remove(cinema);
             _context.SaveChanges();

@@ -7,6 +7,8 @@ using FilmesAPI.Models;
 
 namespace FilmesAPI.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class AddressController : ControllerBase
     {
         public MovieContext _context;
@@ -22,7 +24,7 @@ namespace FilmesAPI.Controllers
         [HttpGet]
         public IEnumerable GetAllAdresses()
         {
-            var allAdresses = _context.Adresses.ToList();
+            var allAdresses = _context.Adresses;
             var response = _mapper.Map<List<ReadAdressDTO>>(allAdresses);
             return response;
         }
@@ -30,7 +32,7 @@ namespace FilmesAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetAddressById(int id)
         {
-            var addresId = _context.Adresses.FirstOrDefault(x => x.Id == id);
+            Address addresId = _context.Adresses.FirstOrDefault(x => x.Id == id);
             if (addresId != null)
             {
                 ReadAdressDTO readAdressDTO = _mapper.Map<ReadAdressDTO>(addresId);
@@ -44,23 +46,23 @@ namespace FilmesAPI.Controllers
             Address address = _mapper.Map<Address>(addressDTO);
             _context.Adresses.Add(address);
             _context.SaveChanges();
-            var created = CreatedAtAction((nameof(GetAddressById)), new { Id = address.Id }, addressDTO);
+            var created = CreatedAtAction((nameof(GetAddressById)), new { Id = address.Id }, address);
             return created;
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult UpdateAddress(int id, [FromBody] UpdateAddressDTO addressDTO)
         {
-            var addressId = GetAddressById(id);
+            Address addressId = _context.Adresses.FirstOrDefault(x => x.Id == id);
             if (addressId == null) return NotFound();
             _mapper.Map(addressDTO, addressId);
             _context.SaveChanges();
             return NoContent();
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteAddress(int id)
         {
-            var addressId = GetAddressById(id);
+            Address addressId = _context.Adresses.FirstOrDefault(x => x.Id == id);
             if (addressId == null) return NotFound();
             _context.Remove(addressId);
             _context.SaveChanges();

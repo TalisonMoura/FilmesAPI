@@ -9,8 +9,8 @@ namespace FilmesAPI.Profiles
         public AddressProfile()
         {
             CreateMap<CreateAddressDTO, Address>();
-            CreateMap<Address, UpdateAddressDTO>();
             CreateMap<Address, ReadAdressDTO>();
+            CreateMap<UpdateAddressDTO, Address>();
         }
     }
 }
