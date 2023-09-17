@@ -10,3 +10,4 @@ namespace FilmesAPI.Data.Dtos
         public ICollection<ReadSessionDTO> Sessions { get; set; }
     }
 }
+ 
