@@ -25,10 +25,12 @@ namespace FilmesAPI.Controllers
             return _mapper.Map<List<ReadSessionDTO>>(_context.Sessions.ToList());
         }
 
-        [HttpGet("{id}")]
-        public IActionResult FindSessionById(int id)
+        [HttpGet("{movieId}/{cinemaId}")]
+        public IActionResult FindSessionById(int movieId, int cinemaId)
         {
-            Session sessionId = _context.Sessions.FirstOrDefault(x => x.Id == id);
+            Session sessionId = _context.Sessions.FirstOrDefault(
+                session => session.MovieId == movieId &&
+                session.CinemaId == cinemaId);
             if (sessionId == null)
             {
                 return NotFound();
@@ -43,20 +45,21 @@ namespace FilmesAPI.Controllers
             Session session = _mapper.Map<Session>(sessionDTO);
             _context.Sessions.Add(session);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(FindSessionById), new Session { Id = session.Id }, sessionDTO);
+            return CreatedAtAction(nameof(FindSessionById), new Session 
+            { MovieId = session.MovieId, CinemaId = session.CinemaId }, sessionDTO);
         }
 
-        [HttpDelete]
-        public IActionResult DeleteSession(int id)
-        {
-            Session session = _context.Sessions.FirstOrDefault(x => x.Id == id);
-            if(session == null)
-            {
-                return NotFound();
-            }
-            _context.Sessions.Remove(session);
-            _context.SaveChanges();
-            return NoContent();
-        }
+        //[HttpDelete]
+        //public IActionResult DeleteSession(int id)
+        //{
+        //    Session session = _context.Sessions.FirstOrDefault();
+        //    if(session == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    _context.Sessions.Remove(session);
+        //    _context.SaveChanges();
+        //    return NoContent();
+        //}
     }
 }
