@@ -25,7 +25,7 @@ namespace FilmesAPI.Controllers
         public IEnumerable GetAllAdresses()
         {
             var allAdresses = _context.Adresses;
-            var response = _mapper.Map<List<ReadAdressDTO>>(allAdresses);
+            var response = _mapper.Map<List<ReadAddressDTO>>(allAdresses);
             return response;
         }
 
@@ -35,7 +35,7 @@ namespace FilmesAPI.Controllers
             Address addresId = _context.Adresses.FirstOrDefault(x => x.Id == id);
             if (addresId != null)
             {
-                ReadAdressDTO readAdressDTO = _mapper.Map<ReadAdressDTO>(addresId);
+                ReadAddressDTO readAdressDTO = _mapper.Map<ReadAddressDTO>(addresId);
                 return Ok(readAdressDTO);
             }
             return NotFound();

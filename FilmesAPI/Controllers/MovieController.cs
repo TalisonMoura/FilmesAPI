@@ -60,7 +60,7 @@ namespace FilmesAPI.Controllers
         [HttpGet]
         public IEnumerable<ReadMovieDto> GetMovies([FromQuery] int skip = 0, [FromQuery] int take = 50)
         {
-            return _mapper.Map<List<ReadMovieDto>>(_movieContext.Movies.Skip(skip).Take(take));
+            return _mapper.Map<List<ReadMovieDto>>(_movieContext.Movies.Skip(skip).Take(take).ToList());
         }
 
         [HttpGet("{id}")]

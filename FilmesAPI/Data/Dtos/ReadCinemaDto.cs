@@ -6,7 +6,7 @@ namespace FilmesAPI.Data.Dtos
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public ReadAdressDTO ReadAdressDTO { get; set; }
-
+        public ReadAddressDTO Address { get; set; }
+        public ICollection<ReadSessionDTO> Sessions { get; set; }
     }
 }
