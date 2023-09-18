@@ -3,6 +3,7 @@ using FilmesAPI.Data;
 using AutoMapper;
 using FilmesAPI.Data.Dtos;
 using FilmesAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FilmesAPI.Controllers
 {
@@ -36,10 +37,15 @@ namespace FilmesAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<ReadCinemaDto> GetAllCines()
+        public IEnumerable<ReadCinemaDto> GetAllCines([FromQuery] int? addressId = null)
         {
-            var cineList = _context.Cinemas.ToList();
-            return _mapper.Map<List<ReadCinemaDto>>(cineList);
+            if (addressId == null)
+            {
+                var cineList = _context.Cinemas.ToList();
+                return _mapper.Map<List<ReadCinemaDto>>(cineList);
+            }
+            return _mapper.Map<List<ReadCinemaDto>>(_context.Cinemas.FromSqlRaw(
+                $"SELECT Id, Nome, AddressId FROM cinemas where cinemas.AddressId = {addressId}").ToList());
         }
         /// <summary>
         /// 
