@@ -11,7 +11,7 @@
             <param name="cinemaDto"></param>
             <returns></returns>
         </member>
-        <member name="M:FilmesAPI.Controllers.CinemaController.GetAllCines">
+        <member name="M:FilmesAPI.Controllers.CinemaController.GetAllCines(System.Nullable{System.Int32})">
             <summary>
             
             </summary>

@@ -58,9 +58,14 @@ namespace FilmesAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ReadMovieDto> GetMovies([FromQuery] int skip = 0, [FromQuery] int take = 50)
+        public IEnumerable<ReadMovieDto> GetMovies([FromQuery] int skip = 0, [FromQuery] int take = 50, [FromQuery] string? cineName = null)
         {
-            return _mapper.Map<List<ReadMovieDto>>(_movieContext.Movies.Skip(skip).Take(take).ToList());
+            if( cineName == null)
+            {
+                return _mapper.Map<List<ReadMovieDto>>(_movieContext.Movies.Skip(skip).Take(take).ToList());
+            }
+            return _mapper.Map<List<ReadMovieDto>>(_movieContext.Movies.Skip(skip).Take(take)
+                   .Where(movie => movie.Sessions.Any(session => session.Cinema.Nome == cineName)).ToList());
         }
 
         [HttpGet("{id}")]
